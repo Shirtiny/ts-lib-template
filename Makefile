@@ -2,7 +2,7 @@
 
 init:
 	@echo "Initialising the project"
-	@yarn && yarn chmod
+	@sudo chmod -R 777 .scripts
 	@./.scripts/init.sh
 
 build_arch: test
