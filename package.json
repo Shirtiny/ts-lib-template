@@ -14,7 +14,6 @@
     "build": "tsc -p tsconfig.json",
     "build:dev": "tsc -p --sourcemap tsconfig.json",
     "clean": "shx rm -rf dist build",
-    "chmod": "shx sudo chmod -R 777 .scripts",
     "ts-node": "ts-node",
     "build-all": "npm run clean && npm run build && npm run esbuild-node && npm run esbuild-browser",
     "esbuild-browser": "esbuild src/browser.ts --bundle --minify --outfile=dist/main.browser.js",
