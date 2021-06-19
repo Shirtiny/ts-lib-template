@@ -1,0 +1,59 @@
+{
+  "name": "customertext",
+  "version": "0.0.8",
+  "description": "customertext",
+  "main": "./dist/main.ts",
+  "browser": "./dist/main.browser.js",
+  "types": "./dist/types/main.d.ts",
+  "bin": "./dist/cli.js",
+  "scripts": {
+    "start": "esbuild --serve=2021 --servedir=dist",
+    "prestart": "npm run esbuild-browser:dev && shx cp -rf public/* dist && node node/open.js",
+    "test": "jest",
+    "lint": "eslint --max-warnings 0 . --ext .ts",
+    "build": "tsc -p tsconfig.json",
+    "build:dev": "tsc -p --sourcemap tsconfig.json",
+    "clean": "shx rm -rf dist build",
+    "ts-node": "ts-node",
+    "build-all": "npm run clean && npm run build && npm run esbuild-node && npm run esbuild-browser",
+    "esbuild-browser": "esbuild src/browser.ts --bundle --minify --outfile=dist/main.browser.js",
+    "esbuild-browser:dev": "esbuild src/browser.ts --bundle  --sourcemap=external --outfile=dist/main.browser.js",
+    "esbuild-node": "esbuild src/cli.ts --bundle --platform=node --minify --outfile=dist/cli.js",
+    "esbuild-node:dev": "esbuild src/cli.ts --bundle --sourcemap=external --outfile=dist/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/customerrep"
+  },
+  "keywords": [],
+  "author": {
+    "name": "name",
+    "email": "email"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/customerrep/issues"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  },
+  "homepage": "https://github.com/customerrep#readme",
+  "devDependencies": {
+    "@cowcoders/eslint-config": "^1.2.9",
+    "@types/jest": "26.0.23",
+    "@types/node": "15.6.1",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "esbuild": "0.12.5",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jest": "27.0.3",
+    "open": "^8.2.0",
+    "prettier": "^2.3.0",
+    "shx": "^0.3.3",
+    "ts-jest": "27.0.1",
+    "ts-node": "10.0.0",
+    "typescript": "^4.3.3"
+  }
+}
