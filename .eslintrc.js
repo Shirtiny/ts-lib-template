@@ -7,7 +7,7 @@ module.exports = {
   },
   extends: ["plugin:prettier/recommended"],
   rules: {
-    // 不符prettier的地标出错误
-    "prettier/prettier": "error",
+    // 不符prettier的地标出警告
+    "prettier/prettier": "warn",
   },
 };
