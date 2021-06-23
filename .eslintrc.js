@@ -12,6 +12,6 @@ module.exports = {
   extends: ["plugin:prettier/recommended"],
   rules: {
     // 不符prettier的地标出警告
-    "prettier/prettier": "warn",
+    "prettier/prettier": "off",
   },
 };
