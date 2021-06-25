@@ -2,7 +2,7 @@
 ###
 # @Author: Shirtiny
 # @Date: 2021-06-11 10:01:14
- # @LastEditTime: 2021-06-25 14:39:31
+# @LastEditTime: 2021-06-25 21:35:45
 # @Description:
 ###
 
@@ -39,7 +39,7 @@ assert_ready_to_publish() {
 publish() {
   echo "Publish"
   echo "Confirm version"
-  yarn publish --access public
+  # yarn publish --access public
   git push --tags
   git push
 }
