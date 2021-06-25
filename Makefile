@@ -24,6 +24,10 @@ build: clean test
 	@echo "👩‍🏭 Building..."
 	@./.scripts/build.sh
 
-publish: build
+version:
+	@echo "👩 Version..."
+	@./.scripts/version.sh
+
+publish: version build
 	@echo "📦 Publish package..."
 	@./.scripts/publish.sh

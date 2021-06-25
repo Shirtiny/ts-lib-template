@@ -4,11 +4,14 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "target": "es6",
+    "target": "ES2015",
     "module": "commonjs",
     "moduleResolution": "node",
+    "resolveJsonModule": false,
     "declaration": true,
+    "declarationDir": "./dist/types",
     "strict": true,
+    "allowJs": false,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -21,8 +24,9 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "removeComments": true,
     "sourceMap": false,
-    "outDir": "./dist/tsc/",
+    "outDir": "./tsc/",
     "types": [
       "node",
       "jest"

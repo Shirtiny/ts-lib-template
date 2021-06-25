@@ -1,10 +1,12 @@
 node_modules
 dist
+tsc
 *.tgz
 
 .DS_Store
 .vscode
 .idea
+pkg
 
 # Log files
 npm-debug.log*

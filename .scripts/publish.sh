@@ -1,4 +1,10 @@
 #!/bin/sh
+###
+# @Author: Shirtiny
+# @Date: 2021-06-11 10:01:14
+ # @LastEditTime: 2021-06-25 14:39:31
+# @Description:
+###
 
 set -e
 
@@ -17,50 +23,27 @@ is_valid_version() {
 }
 
 assert_ready_to_publish() {
-  is_valid_version "$1"
+  # is_valid_version "$1"
   if [ ! -d dist ]; then
     error "Need build first"
   fi
 }
 
-prepare_folder() {
-  echo "Cleanup folders to publish"
-  find dist/tsc -type f -name '*.js' -print -delete
-  find dist/tsc -type f -name '*.js.map' -print -delete
-  mv dist/tsc dist/types
-}
+# prepare_folder() {
+#   echo "Cleanup folders to publish"
+#   find dist/tsc -type f -name '*.js' -print -delete
+#   find dist/tsc -type f -name '*.js.map' -print -delete
+#   mv dist/tsc dist/types
+# }
 
 publish() {
-  echo "Publish $1"
-  yarn publish --new-version "$1" --access public
+  echo "Publish"
+  echo "Confirm version"
+  yarn publish --access public
+  git push --tags
+  git push
 }
 
-NEW_VERSION=$1
-
-if [ -z "$NEW_VERSION" ]; then
-  while true; do
-    echo "Specify an version increase (patch minor major) "
-    read -r answer
-    case $answer in
-    patch)
-      NEW_VERSION="patch"
-      break
-      ;;
-    minor)
-      NEW_VERSION="minor"
-      break
-      ;;
-    major)
-      NEW_VERSION="major"
-      break
-      ;;
-    *)
-      echo "Only patch minor or major, please."
-      ;;
-    esac
-  done
-fi
-
-assert_ready_to_publish $NEW_VERSION
-prepare_folder
-publish $NEW_VERSION
+assert_ready_to_publish
+# prepare_folder
+publish
