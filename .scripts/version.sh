@@ -3,7 +3,7 @@
 ###
 # @Author: Shirtiny
 # @Date: 2021-06-25 12:13:58
-# @LastEditTime: 2021-06-25 15:34:48
+ # @LastEditTime: 2021-06-25 21:45:55
 # @Description:
 ###
 
@@ -19,7 +19,7 @@ version() {
   yarn version --new-version "$1"
   git add .
   git status
-  git commit -m "$1"
+  git commit -m "$1" || true
 }
 
 NEW_VERSION=$1
