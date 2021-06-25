@@ -1,42 +1,63 @@
 {
-  "name": "customertext",
-  "version": "0.0.8",
-  "description": "customertext",
-  "main": "./dist/main.ts",
-  "browser": "./dist/main.browser.js",
+  "name": "@shirtiny/logger",
+  "version": "3.0.0",
+  "description": "Simple console log with css, write in typescript.",
   "types": "./dist/types/main.d.ts",
+  "main": "./dist/cli.js",
+  "browser": "./dist/main.browser.js",
+  "module": "./dist/main.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/main.es.js",
+      "require": "./dist/cli.js"
+    }
+  },
   "bin": "./dist/cli.js",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
   "scripts": {
-    "start": "esbuild src/browser.ts --outfile=dist/main.browser.js --bundle --sourcemap=external --serve=2021 --servedir=dist",
-    "prestart": "npm run esbuild-browser:dev && shx cp -rf public/* dist && node node/open.js",
+    "start": "esbuild src/main.ts --outfile=dist/main.dev.js --platform=browser --global-name=logger_ts  --bundle --sourcemap=external --serve=2021 --servedir=dist",
+    "prestart": "npm run esbuild-main:dev && shx cp -rf public/* dist/ && node node/open.js",
+    "esbuild-main:dev": "esbuild src/main.ts --platform=browser --global-name=logger_ts --bundle  --sourcemap=external --outfile=dist/main.dev.js",
     "test": "jest",
     "lint": "eslint --max-warnings 0 . --ext .ts",
     "build": "tsc -p tsconfig.json",
     "clean": "shx rm -rf dist build",
     "ts-node": "ts-node",
-    "build-all": "npm run clean && npm run build && npm run esbuild-node && npm run esbuild-browser",
-    "esbuild-browser": "esbuild src/browser.ts --bundle --minify --outfile=dist/main.browser.js",
-    "esbuild-browser:dev": "esbuild src/browser.ts --bundle  --sourcemap=external --outfile=dist/main.browser.js",
+    "build-all": "npm run clean && npm run build && npm run esbuild-node && npm run esbuild-browser && npm run esbuild-esm",
+    "esbuild-browser": "esbuild src/browser.ts --platform=browser --global-name=logger_ts --bundle --minify --outfile=dist/main.browser.js",
+    "esbuild-browser:dev": "esbuild src/browser.ts --platform=browser --global-name=logger_ts --bundle  --sourcemap=external --outfile=dist/main.browser.js",
     "esbuild-node": "esbuild src/cli.ts --bundle --platform=node --minify --outfile=dist/cli.js",
-    "esbuild-node:dev": "esbuild src/cli.ts --bundle --sourcemap=external --outfile=dist/cli.js"
-   },
+    "esbuild-node:dev": "esbuild src/cli.ts --bundle --platform=node --sourcemap=external --outfile=dist/cli.js",
+    "esbuild-esm": "esbuild src/es.ts --platform=neutral --bundle --minify --outfile=dist/main.es.js",
+    "esbuild-esm:dev": "esbuild src/es.ts --platform=neutral --bundle --sourcemap=external --outfile=dist/main.es.js"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/customerrep"
+    "url": "git+https://github.com/Shirtiny/logger"
   },
-  "keywords": [],
+  "keywords": [
+    "consloe",
+    "log",
+    "ts",
+    "logger",
+    "TypeScript",
+    "shirtiny"
+  ],
   "author": {
-    "name": "name",
-    "email": "email"
+    "name": "shirtiny",
+    "email": "shirtiny@gmail.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/customerrep/issues"
+    "url": "https://github.com/Shirtiny/logger/issues"
   },
   "jest": {
     "preset": "ts-jest"
   },
-  "homepage": "https://github.com/customerrep#readme",
+  "homepage": "https://github.com/Shirtiny/logger#readme",
   "devDependencies": {
     "@cowcoders/eslint-config": "^1.2.9",
     "@types/jest": "26.0.23",
