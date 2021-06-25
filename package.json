@@ -1,7 +1,7 @@
 {
-  "name": "@shirtiny/logger",
-  "version": "3.0.0",
-  "description": "Simple console log with css, write in typescript.",
+  "name": "ts-lib-template",
+  "version": "1.0.1",
+  "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/cli.js",
   "browser": "./dist/main.browser.js",
@@ -36,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shirtiny/logger"
+    "url": "git+https://github.com/Shirtiny/ts-lib-template"
   },
   "keywords": [
     "consloe",
@@ -52,12 +52,12 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Shirtiny/logger/issues"
+    "url": "https://github.com/Shirtiny/ts-lib-template/issues"
   },
   "jest": {
     "preset": "ts-jest"
   },
-  "homepage": "https://github.com/Shirtiny/logger#readme",
+  "homepage": "https://github.com/Shirtiny/ts-lib-template#readme",
   "devDependencies": {
     "@cowcoders/eslint-config": "^1.2.9",
     "@types/jest": "26.0.23",
