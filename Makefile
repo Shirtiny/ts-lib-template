@@ -14,7 +14,7 @@ clean:
 
 clean_all:
 	@echo "🧨 Clean all"
-	@rm -Rf node_modules package-lock.json
+	@rm -Rf node_modules package-lock.json yarn.lock
 
 test:
 	@echo "Testing..."
