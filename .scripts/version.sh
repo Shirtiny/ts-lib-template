@@ -3,9 +3,16 @@
 ###
 # @Author: Shirtiny
 # @Date: 2021-06-25 12:13:58
- # @LastEditTime: 2021-06-25 15:34:06
+# @LastEditTime: 2021-06-25 15:34:48
 # @Description:
 ###
+
+# set -e
+
+error() {
+  echo "🚨 $1"
+  exit 1
+}
 
 version() {
   echo "Set Version $1"
