@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-template",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/cli.js",
@@ -19,8 +19,8 @@
   ],
   "scripts": {
     "start": "node .node/server.js",
-    "prestart": "npm run esbuild-main:dev && shx cp -rf public/* dist/",
-    "esbuild-main:dev": "esbuild src/main.ts --platform=browser --global-name=tsLibTemplate --bundle  --sourcemap=external --outfile=dist/main.dev.js",
+    "prestart": "npm run esbuild:dev && shx cp -rf public/* dist/",
+    "esbuild:dev": "esbuild src/index.ts --platform=browser --global-name=tsLibTemplate --bundle  --sourcemap=both --outfile=dist/index.js",
     "test": "jest",
     "lint": "eslint --max-warnings 0 . --ext .ts",
     "build": "tsc -p tsconfig.json",
