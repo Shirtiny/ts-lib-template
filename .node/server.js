@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-25 17:35:25
- * @LastEditTime: 2021-06-25 21:18:09
+ * @LastEditTime: 2021-06-26 12:24:43
  * @Description:
  */
 "use strict";
@@ -19,12 +19,12 @@ esbuild
       host: "localhost",
     },
     {
-      entryPoints: [path.resolve(__dirname, "../src/main.ts")],
-      outfile: path.resolve(__dirname, "../dist/main.dev.js"),
+      entryPoints: [path.resolve(__dirname, "../src/index.ts")],
+      outfile: path.resolve(__dirname, "../dist/index.js"),
       platform: "browser",
-      globalName: "bvplayer_core",
+      globalName: "tsLibTemplate",
       bundle: true,
-      sourcemap: "external",
+      sourcemap: "both",
     },
   )
   .then((result) => {
