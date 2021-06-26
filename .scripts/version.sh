@@ -1,12 +1,5 @@
 #!/bin/sh
 
-###
-# @Author: Shirtiny
-# @Date: 2021-06-25 12:13:58
- # @LastEditTime: 2021-06-25 21:51:09
-# @Description:
-###
-
 # set -e
 
 error() {

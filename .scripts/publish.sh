@@ -1,10 +1,4 @@
 #!/bin/sh
-###
-# @Author: Shirtiny
-# @Date: 2021-06-11 10:01:14
-# @LastEditTime: 2021-06-25 21:35:45
-# @Description:
-###
 
 set -e
 
