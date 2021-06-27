@@ -2,4 +2,5 @@
 
 set -eu
 
-yarn build-all
+yarn build
+rm -rf tsc
