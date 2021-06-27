@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-template",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/cli.js",
@@ -19,20 +19,12 @@
   ],
   "scripts": {
     "start": "node .node/server.js",
-    "prestart": "npm run esbuild:dev && shx cp -rf public/* dist/",
-    "esbuild:dev": "esbuild src/index.ts --platform=browser --global-name=tsLibTemplate --bundle  --sourcemap=both --outfile=dist/index.js",
+    "build": "npm run clean && npm run build:types && node .node/builder.js",
     "test": "jest",
     "lint": "eslint --max-warnings 0 . --ext .ts",
-    "build": "tsc -p tsconfig.json",
+    "build:types": "tsc -p tsconfig.json",
     "clean": "shx rm -rf dist build",
-    "ts-node": "ts-node",
-    "build-all": "npm run clean && npm run build && npm run esbuild-node && npm run esbuild-browser && npm run esbuild-esm",
-    "esbuild-browser": "esbuild src/browser.ts --platform=browser --global-name=tsLibTemplate --bundle --minify --outfile=dist/main.browser.js",
-    "esbuild-browser:dev": "esbuild src/browser.ts --platform=browser --global-name=tsLibTemplate --bundle  --sourcemap=external --outfile=dist/main.browser.js",
-    "esbuild-node": "esbuild src/cli.ts --bundle --platform=node --minify --outfile=dist/cli.js",
-    "esbuild-node:dev": "esbuild src/cli.ts --bundle --platform=node --sourcemap=external --outfile=dist/cli.js",
-    "esbuild-esm": "esbuild src/es.ts --platform=neutral --bundle --minify --outfile=dist/main.es.js",
-    "esbuild-esm:dev": "esbuild src/es.ts --platform=neutral --bundle --sourcemap=external --outfile=dist/main.es.js"
+    "ts-node": "ts-node"
   },
   "repository": {
     "type": "git",
@@ -65,6 +57,7 @@
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
     "esbuild": "0.12.5",
+    "esbuild-sass-plugin": "^1.4.8",
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
