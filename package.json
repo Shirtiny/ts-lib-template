@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-template",
-  "version": "1.1.7",
+  "version": "1.2.0",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/cli.js",
@@ -18,8 +18,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "start": "node .node/server.js",
-    "build": "npm run clean && npm run build:types && node .node/builder.js",
+    "start": "dotenv -c development node .node/server.js",
+    "build": "npm run clean && npm run build:types && dotenv -c production node .node/builder.js",
     "test": "jest",
     "lint": "eslint --max-warnings 0 . --ext .ts",
     "build:types": "tsc -p tsconfig.json",
@@ -56,6 +56,7 @@
     "@types/node": "15.6.1",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
+    "dotenv-cli": "^4.0.0",
     "esbuild": "0.12.5",
     "esbuild-sass-plugin": "^1.4.8",
     "eslint": "^7.28.0",
