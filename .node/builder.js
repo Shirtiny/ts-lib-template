@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 17:41:22
- * @LastEditTime: 2021-06-27 09:52:15
+ * @LastEditTime: 2021-06-29 15:48:33
  * @Description:
  */
 const esbuild = require("esbuild");
@@ -50,7 +50,7 @@ const build = async ({ entryPoints = [], platform, outfile, plugins = [] }) => {
       outfile,
       plugins,
     });
-    logger.chan("Building", entryPoints, outfile);
+    logger.chan("Building", [entryPoints], outfile);
   } catch (e) {
     return console.error(e.message);
   }
