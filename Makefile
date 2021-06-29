@@ -31,3 +31,6 @@ version:
 publish: version build
 	@echo "📦 Publish package..."
 	@./.scripts/publish.sh
+
+start:
+	npm run start
