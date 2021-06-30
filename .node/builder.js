@@ -5,6 +5,7 @@
  * @Description:
  */
 const esbuild = require("esbuild");
+const childProcess = require("child_process");
 const path = require("path");
 const { sassPlugin } = require("esbuild-sass-plugin");
 const { config, isDev } = require("./var");
@@ -50,6 +51,7 @@ const build = async ({ entryPoints = [], platform, outfile, plugins = [] }) => {
       outfile,
       plugins,
     });
+    childProcess.execSync('tsc');
     logger.chan("Building", [entryPoints.join("; ")], outfile);
   } catch (e) {
     return console.error(e.message);
