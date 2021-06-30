@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-template",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/cli.js",
@@ -19,10 +19,9 @@
   ],
   "scripts": {
     "start": "dotenv -c development node .node/server.js",
-    "build": "npm run clean && npm run build:types && dotenv -c production node .node/builder.js",
+    "build": "npm run clean && dotenv -c production node .node/builder.js",
     "test": "jest",
     "lint": "eslint --max-warnings 0 . --ext .ts",
-    "build:types": "tsc -p tsconfig.json",
     "clean": "shx rm -rf dist build",
     "ts-node": "ts-node"
   },
