@@ -10,6 +10,7 @@
     "resolveJsonModule": false,
     "declaration": true,
     "declarationDir": "./dist/types",
+    "emitDeclarationOnly": true,
     "strict": true,
     "allowJs": false,
     "noImplicitAny": true,
