@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-template",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/cli.js",
