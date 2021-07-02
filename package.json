@@ -1,12 +1,13 @@
 {
   "name": "ts-lib-template",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/main.es.js",
   "browser": "./dist/main.es.js",
   "module": "./dist/main.es.js",
   "exports": {
+    "./dist/main.es.css": "./dist/main.es.css",
     ".": {
       "import": "./dist/main.es.js",
       "require": "./dist/cli.js"
