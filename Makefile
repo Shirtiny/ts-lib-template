@@ -10,7 +10,7 @@ build_arch: test
 
 clean:
 	@echo "🛁 Cleaning..."
-	@npm run clean
+	@rm -Rf dist
 
 clean_all:
 	@echo "🧨 Clean all"
