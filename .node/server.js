@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-25 17:35:25
- * @LastEditTime: 2021-06-29 15:55:05
+ * @LastEditTime: 2021-07-12 09:44:16
  * @Description:
  */
 "use strict";
@@ -11,6 +11,9 @@ const http = require("http");
 const path = require("path");
 const open = require("open");
 const { sassPlugin } = require("esbuild-sass-plugin");
+const postcss = require("postcss");
+const autoprefixer = require("autoprefixer");
+const postcssPresetEnv = require("postcss-preset-env");
 const util = require("./util");
 const { config } = require("./var");
 const logger = require("./logger");
@@ -21,7 +24,6 @@ const distDirPath = path.resolve(__dirname, "../dist");
 
 const srcFileName = "index.ts";
 const distFileName = "index.js";
-
 
 // 需代理的路径列表
 const proxyPathList = Object.keys(config.devServer?.proxy || {});
@@ -36,10 +38,15 @@ const createDevProxyURL = (reqUrl = "") => {
     const { target, pathRewrite } = proxy[proxyPath];
     const rewriteKey = Object.keys(pathRewrite || {})[0];
     if (!rewriteKey) return new URL(`${target}${reqUrl}`);
-    return new URL(`${target}${reqUrl.replace(new RegExp(rewriteKey), pathRewrite[rewriteKey])}`)
+    return new URL(
+      `${target}${reqUrl.replace(
+        new RegExp(rewriteKey),
+        pathRewrite[rewriteKey],
+      )}`,
+    );
   }
-  return null
-}
+  return null;
+};
 
 const serve = async () => {
   await util.mkdir(distDirPath);
@@ -57,7 +64,20 @@ const serve = async () => {
       globalName: config.globalName,
       bundle: true,
       sourcemap: "both",
-      plugins: [sassPlugin()],
+      plugins: [
+        sassPlugin({
+          async transform(source) {
+            const { css } = await postcss([
+              autoprefixer,
+              postcssPresetEnv({ stage: 0 }),
+            ]).process(source, { from: undefined });
+            return css;
+          },
+        }),
+      ],
+      loader: {
+        ".svg": "dataurl",
+      },
     },
   );
 
@@ -67,7 +87,7 @@ const serve = async () => {
 
   http
     .createServer((req, res) => {
-      const proxyURL = createDevProxyURL(req.url)
+      const proxyURL = createDevProxyURL(req.url);
 
       const options = {
         hostname: proxyURL?.hostname || host,
@@ -79,7 +99,16 @@ const serve = async () => {
 
       const proxyReq = http.request(options, (proxyRes) => {
         res.writeHead(proxyRes.statusCode, proxyRes.headers);
-        logger.chan(req.method.toUpperCase(), [req.url, proxyURL ? `${proxyURL.hostname}:${proxyURL.port}${proxyURL.pathname}` : ""], res.statusCode);
+        logger.chan(
+          req.method.toUpperCase(),
+          [
+            req.url,
+            proxyURL
+              ? `${proxyURL.hostname}:${proxyURL.port}${proxyURL.pathname}`
+              : "",
+          ],
+          res.statusCode,
+        );
         proxyRes.pipe(res, { end: true });
       });
 

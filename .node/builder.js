@@ -1,13 +1,16 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 17:41:22
- * @LastEditTime: 2021-06-29 18:14:57
+ * @LastEditTime: 2021-07-12 09:44:48
  * @Description:
  */
 const esbuild = require("esbuild");
 const childProcess = require("child_process");
 const path = require("path");
 const { sassPlugin } = require("esbuild-sass-plugin");
+const postcss = require("postcss");
+const autoprefixer = require("autoprefixer");
+const postcssPresetEnv = require("postcss-preset-env");
 const { config, isDev } = require("./var");
 const logger = require("./logger");
 
@@ -23,13 +26,39 @@ const buildList = [
     entryPoints: [createFilePath(srcDirPath, "browser.ts")],
     platform: "browser",
     outfile: createFilePath(distDirPath, "main.browser.js"),
-    plugins: [sassPlugin({})],
+    plugins: [
+      sassPlugin({
+        async transform(source) {
+          const { css } = await postcss([
+            autoprefixer,
+            postcssPresetEnv({ stage: 0 }),
+          ]).process(source, { from: undefined });
+          return css;
+        },
+      }),
+    ],
+    loader: {
+      ".svg": "dataurl",
+    },
   },
   {
     entryPoints: [createFilePath(srcDirPath, "es.ts")],
     platform: "neutral",
     outfile: createFilePath(distDirPath, "main.es.js"),
-    plugins: [sassPlugin()],
+    plugins: [
+      sassPlugin({
+        async transform(source) {
+          const { css } = await postcss([
+            autoprefixer,
+            postcssPresetEnv({ stage: 0 }),
+          ]).process(source, { from: undefined });
+          return css;
+        },
+      }),
+    ],
+    loader: {
+      ".svg": "dataurl",
+    },
   },
   {
     entryPoints: [createFilePath(srcDirPath, "cli.ts")],
@@ -51,7 +80,7 @@ const build = async ({ entryPoints = [], platform, outfile, plugins = [] }) => {
       outfile,
       plugins,
     });
-    childProcess.execSync('tsc');
+    childProcess.execSync("tsc");
     logger.chan("Building", [entryPoints.join("; ")], outfile);
   } catch (e) {
     return console.error(e.message);
