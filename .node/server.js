@@ -64,6 +64,9 @@ const serve = async () => {
       globalName: config.globalName,
       bundle: true,
       sourcemap: "both",
+      define: {
+        "process.env": JSON.stringify(process.env),
+      },
       plugins: [
         sassPlugin({
           async transform(source) {

@@ -77,6 +77,9 @@ const build = async ({ entryPoints = [], platform, outfile, plugins = [] }) => {
       bundle: true,
       minify: !isDev,
       sourcemap: isDev ? "both" : false,
+      define: {
+        "process.env": JSON.stringify(process.env),
+      },
       outfile,
       plugins,
     });
