@@ -1,6 +1,6 @@
 # ts-lib-template
 
-> A starter template for typescript library. 
+> A starter template for typescript library.
 
 ```shell
 # init project
@@ -37,21 +37,39 @@ This is a template for typescript library base on esbuild. This template include
 
 - Jest
 
-- Sass/scss  & Autoprefixer
+- Sass/scss & Autoprefixer
 
 - Github action
 
-
-
-
 ## Usage
+
 Create your repository by clicking 'Use this template' top of the page.
 
-## Acknowledgment 
+## Config
+
+```js
+// .sh.js
+module.exports = {
+  // your lib global name
+  globalName: "tsLibTemplate",
+  // devServer option
+  devServer: {
+    host: "localhost",
+    port: 2021,
+    proxy: {
+      "^/api": {
+        target: "http://192.168.6.111:9780",
+        pathRewrite: { "^/api": "" },
+      },
+    },
+  },
+};
+```
+
+## Acknowledgment
 
 [raulanatol / template-ts-package](https://github.com/raulanatol/template-ts-package)
 
-
 ## License
-The MIT License (MIT)
 
+The MIT License (MIT)
