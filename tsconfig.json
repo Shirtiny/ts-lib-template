@@ -4,6 +4,9 @@
     "paths": {
       // "@/*": ["src/*"]
     },
+    "jsx": "preserve",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
     "target": "ES2015",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -13,7 +16,7 @@
     "emitDeclarationOnly": true,
     "strict": true,
     "allowJs": false,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "noUnusedLocals": true,
@@ -39,6 +42,7 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.tsx",
   ],
   "exclude": [
     "node_modules",
