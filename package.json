@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-template",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/main.es.js",
@@ -10,10 +10,10 @@
     "./dist/main.es.css": "./dist/main.es.css",
     ".": {
       "import": "./dist/main.es.js",
-      "require": "./dist/cli.js"
+      "require": "./dist/main.cli.js"
     }
   },
-  "bin": "./dist/cli.js",
+  "bin": "./dist/main.cli.js",
   "files": [
     "dist",
     "LICENSE"

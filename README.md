@@ -52,6 +52,8 @@ Create your repository by clicking 'Use this template' top of the page.
 module.exports = {
   // your lib global name
   globalName: "tsLibTemplate",
+  // the output prefix name， default is 'main', please check your package.json after this option changed.
+  outputFileName: "main",
   // devServer option
   devServer: {
     host: "localhost",
@@ -63,6 +65,9 @@ module.exports = {
       },
     },
   },
+  // jsx options direct set to esbuild
+  jsxFactory: "React.createElement",
+  jsxFragment: "React.Fragment",
 };
 ```
 
