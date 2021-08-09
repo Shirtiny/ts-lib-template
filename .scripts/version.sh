@@ -7,9 +7,14 @@ error() {
   exit 1
 }
 
-version() {
-  echo "Set Version $1"
+package_version() {
+  echo "Set Package Version $1"
   yarn version --new-version "$1"
+
+}
+
+git_commit() {
+  echo "Run git"
   git add .
   git status
   git commit || true
@@ -19,7 +24,7 @@ NEW_VERSION=$1
 
 if [ -z "$NEW_VERSION" ]; then
   while true; do
-    echo "Specify an version increase (patch minor major) "
+    echo "Specify an version increase (patch minor major no) "
     read -r answer
     case $answer in
     patch)
@@ -34,6 +39,10 @@ if [ -z "$NEW_VERSION" ]; then
       NEW_VERSION="major"
       break
       ;;
+    no)
+      NEW_VERSION="no"
+      break
+      ;;
     *)
       echo "Only patch minor or major, please."
       ;;
@@ -41,4 +50,7 @@ if [ -z "$NEW_VERSION" ]; then
   done
 fi
 
-version $NEW_VERSION
+if [ $NEW_VERSION != "no" ]; then
+  package_version $NEW_VERSION
+  git_commit
+fi
