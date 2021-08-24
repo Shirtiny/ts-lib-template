@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 17:41:22
- * @LastEditTime: 2021-08-08 10:18:48
+ * @LastEditTime: 2021-08-24 09:51:38
  * @Description:
  */
 const esbuild = require("esbuild");
@@ -16,7 +16,10 @@ const logger = require("./logger");
 
 const srcDirPath = "../src";
 const distDirPath = "../dist";
+const typesDirPath = path.resolve(__dirname, `${distDirPath}/types`);
 const fileName = config.outputFileName || "main";
+
+const tscCommand = `tsc --declaration --declarationDir ${typesDirPath} --emitDeclarationOnly`;
 
 const createFilePath = (dirPath, fileName) => {
   return path.resolve(__dirname, `${dirPath}/${fileName}`);
@@ -86,7 +89,7 @@ const build = async ({ entryPoints = [], platform, outfile, plugins = [] }) => {
       jsxFactory: config.jsxFactory,
       jsxFragment: config.jsxFragment,
     });
-    childProcess.execSync("tsc");
+    childProcess.execSync(tscCommand);
     logger.chan("Building", [entryPoints.join("; ")], outfile);
   } catch (e) {
     return console.error(e.message);
