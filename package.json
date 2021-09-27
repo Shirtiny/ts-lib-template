@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-template",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/main.es.js",
@@ -64,6 +64,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "jest": "27.0.3",
+    "nanocolors": "^0.2.10",
     "open": "^8.2.0",
     "postcss": "^8.3.5",
     "postcss-preset-env": "^6.7.0",
