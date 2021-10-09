@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 17:41:22
- * @LastEditTime: 2021-08-24 09:51:38
+ * @LastEditTime: 2021-10-09 10:13:44
  * @Description:
  */
 const esbuild = require("esbuild");
@@ -73,38 +73,35 @@ const buildList = [
 ];
 
 const build = async ({ entryPoints = [], platform, outfile, plugins = [] }) => {
-  try {
-    await esbuild.build({
-      entryPoints,
-      platform,
-      globalName: config.globalName,
-      bundle: true,
-      minify: !isDev,
-      sourcemap: isDev ? "both" : false,
-      define: {
-        "process.env": JSON.stringify(process.env),
-      },
-      outfile,
-      plugins,
-      jsxFactory: config.jsxFactory,
-      jsxFragment: config.jsxFragment,
-    });
-    childProcess.execSync(tscCommand);
-    logger.chan("Building", [entryPoints.join("; ")], outfile);
-  } catch (e) {
-    return console.error(e.message);
-  }
+  await logger.runTask({
+    title: `Building ${entryPoints.join("; ")}`,
+    successTitle: `Build ${outfile} successfully`,
+    taskFn: async () => {
+      await esbuild.build({
+        entryPoints,
+        platform,
+        globalName: config.globalName,
+        bundle: true,
+        minify: !isDev,
+        sourcemap: isDev ? "both" : false,
+        define: {
+          "process.env": JSON.stringify(process.env),
+        },
+        outfile,
+        plugins,
+        jsxFactory: config.jsxFactory,
+        jsxFragment: config.jsxFragment,
+      });
+    },
+  });
 };
 
 const buildAll = async () => {
-  logger.log("o(*^▽^*)┛ bundle, please wait...\n");
+  childProcess.execSync(tscCommand);
+  logger.log("\n♪(^∇^*) ~☆!, Generated declaration.");
+  logger.log("o(*^▽^*)┛ Building, please wait...");
   const promises = buildList.map((item) => build(item));
-  try {
-    await Promise.all(promises);
-    logger.log("\n♪(^∇^*) done~☆!");
-  } catch (e) {
-    console.log(e.message);
-  }
+  await Promise.all(promises);
 };
 
 buildAll();
