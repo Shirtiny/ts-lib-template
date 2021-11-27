@@ -1,6 +1,6 @@
 {
   "name": "@shirtiny/ts-lib-template",
-  "version": "1.4.9",
+  "version": "1.4.10",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/main.es.js",
@@ -31,11 +31,10 @@
     "url": "git+https://github.com/Shirtiny/ts-lib-template"
   },
   "keywords": [
-    "consloe",
-    "log",
     "ts",
-    "logger",
     "TypeScript",
+    "template",
+    "library",
     "shirtiny"
   ],
   "author": {
