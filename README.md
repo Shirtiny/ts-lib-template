@@ -49,6 +49,16 @@ Create your repository by clicking 'Use this template' top of the page.
 
 ```js
 // .sh.js
+const { MY_ENV, PORT, NODE_ENV, npm_package_name } = process.env;
+
+// the customized ENV， just pick what you need
+const env = {
+  MY_ENV,
+  PORT,
+  NODE_ENV,
+  npm_package_name,
+};
+
 module.exports = {
   // your lib global name
   globalName: "tsLibTemplate",
@@ -56,11 +66,11 @@ module.exports = {
   outputFileName: "main",
   // devServer option
   devServer: {
-    host: "localhost",
-    port: 2021,
+    host: HOST || "localhost",
+    port: PORT || 2021,
     proxy: {
       "^/api": {
-        target: "http://192.168.6.111:9780",
+        target: "http://192.168.0.123:1234",
         pathRewrite: { "^/api": "" },
       },
     },
@@ -68,6 +78,8 @@ module.exports = {
   // jsx options direct set to esbuild
   jsxFactory: "React.createElement",
   jsxFragment: "React.Fragment",
+  // if env is false, default is all process env
+  env,
 };
 ```
 
