@@ -1,3 +1,9 @@
 import { add } from "./main";
+import "./index.scss";
 
-console.log("hello world", add(1, 0), "dev");
+const div = document.createElement("div");
+div.classList.add("example");
+div.textContent = "this is an scss example, open the console";
+document.querySelector("#root")!.appendChild(div);
+
+console.log("hello world", ", env is dev,  test add: ", add(1, 0));

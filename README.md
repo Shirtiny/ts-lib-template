@@ -43,7 +43,7 @@ This is a template for typescript library base on esbuild. This template include
 
 ## Usage
 
-Create your repository by clicking 'Use this template' top of the page.
+Create your repository by clicking 'Use this template' top of the page. Then, check the package.json file.
 
 ## Config
 

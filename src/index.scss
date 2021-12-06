@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  position: relative;
+  .example {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+
+    background-color: #00b7c3;
+    color: #fff;
+    white-space: nowrap;
+    padding: 8px;
+  }
+}
