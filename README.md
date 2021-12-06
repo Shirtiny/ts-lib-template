@@ -1,6 +1,6 @@
 # ts-lib-template
 
-> A starter template for typescript library.
+> [Ts-lib-template](https://github.com/Shirtiny/ts-lib-template) A starter template for typescript library.
 
 ```shell
 # init project
