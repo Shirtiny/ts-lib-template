@@ -1,6 +1,6 @@
 {
   "name": "@shirtiny/ts-lib-template",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "ts-lib-template desc",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/main.es.js",
