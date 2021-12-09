@@ -34,3 +34,6 @@ publish: version build
 
 start: init
 	npm run start
+
+check:
+	@./.scripts/check/missing_gitattributes.sh

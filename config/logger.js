@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 21:18:47
- * @LastEditTime: 2021-10-09 09:58:10
+ * @LastEditTime: 2021-12-09 10:14:35
  * @Description:
  */
 
@@ -37,11 +37,14 @@ const runTask = async ({
   successTitle = "",
   taskFn = async () => {},
 }) => {
-  const t = await tasuku(chalk.magentaBright.bold(title), async ({ setTitle }) => {
-    const r = await taskFn();
-    setTitle(chalk.yellowBright(successTitle));
-    return r;
-  });
+  const t = await tasuku(
+    chalk.magentaBright.bold(title),
+    async ({ setTitle }) => {
+      const r = await taskFn();
+      setTitle(chalk.yellowBright(successTitle));
+      return r;
+    },
+  );
   return t.result;
 };
 
