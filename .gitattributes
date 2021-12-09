@@ -97,6 +97,7 @@ TODO              text
 *.tpl             text
 *.twig            text
 *.vue             text
+*.http            text
 
 # Configs
 *.cnf             text
@@ -104,9 +105,8 @@ TODO              text
 *.config          text
 .editorconfig     text
 .env              text
-.env.dev          text
-.env.prod         text
-.gitattributes    text
+.env.development  text eol=lf
+.gitattributes    text eol=lf
 .gitconfig        text
 .htaccess         text
 *.lock            text -diff
