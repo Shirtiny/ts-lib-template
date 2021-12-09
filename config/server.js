@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-25 17:35:25
- * @LastEditTime: 2021-12-09 10:16:02
+ * @LastEditTime: 2021-12-09 11:05:55
  * @Description:
  */
 "use strict";
@@ -42,7 +42,6 @@ const createDevProxyURL = (reqUrl = "") => {
       `${target}${reqUrl.replace(
         new RegExp(rewriteKey),
         pathRewrite[rewriteKey],
-
       )}`,
     );
   }
@@ -54,9 +53,8 @@ const serve = async () => {
   util.cpAllDirChildsToDir(publicDirPath, distDirPath);
 
   const result = await esbuild.serve(
-
     {
-       servedir: path.resolve(__dirname, "../dist"),
+      servedir: path.resolve(__dirname, "../dist"),
       host: config.devServer.host,
     },
     {
