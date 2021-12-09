@@ -53,8 +53,9 @@ const serve = async () => {
   util.cpAllDirChildsToDir(publicDirPath, distDirPath);
 
   const result = await esbuild.serve(
+
     {
-      servedir: path.resolve(__dirname, "../dist"),
+       servedir: path.resolve(__dirname, "../dist"),
       host: config.devServer.host,
     },
     {
