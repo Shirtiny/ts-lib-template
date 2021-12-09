@@ -1,6 +1,6 @@
 {
   "name": "@shirtiny/ts-lib-template",
-  "version": "1.4.15",
+  "version": "1.4.16",
   "description": "ts-lib-template desc",
   "type": "module",
   "types": "./dist/types/main.d.ts",
@@ -60,7 +60,6 @@
     "camelcase": "^6.2.1",
     "dotenv-cli": "^4.0.0",
     "esbuild": "0.12.5",
-    "esbuild-plugin-inline-worker": "^0.1.1",
     "esbuild-plugin-time": "^1.0.0",
     "esbuild-sass-plugin": "^1.4.8",
     "eslint": "^7.28.0",
