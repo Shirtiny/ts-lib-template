@@ -12,6 +12,6 @@
   "extends": ["plugin:prettier/recommended"],
   "rules": {
     // 不符prettier的地标出警告
-    "prettier/prettier": 1
+    "prettier/prettier": "off"
   }
 }
