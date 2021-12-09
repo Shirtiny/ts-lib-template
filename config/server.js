@@ -1,26 +1,28 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-25 17:35:25
- * @LastEditTime: 2021-12-09 14:46:56
+ * @LastEditTime: 2021-12-09 15:31:14
  * @Description:
  */
 "use strict";
 
-const esbuild = require("esbuild");
-const http = require("http");
-const path = require("path");
-const open = require("open");
-const { sassPlugin } = require("esbuild-sass-plugin");
-const postcss = require("postcss");
-const autoprefixer = require("autoprefixer");
-const postcssPresetEnv = require("postcss-preset-env");
-const util = require("./util");
-const { config } = require("./var");
-const logger = require("./logger");
+import esbuild from "esbuild";
+import http from "http";
+import path from "path";
+import open from "open";
+import { sassPlugin } from "esbuild-sass-plugin";
+import postcss from "postcss";
+import autoprefixer from "autoprefixer";
+import postcssPresetEnv from "postcss-preset-env";
+import { config } from "./var.js";
+import util from "./util.js";
+import logger from "./logger.js";
 
-const publicDirPath = path.resolve(__dirname, "../public");
-const srcDirPath = path.resolve(__dirname, "../src");
-const distDirPath = path.resolve(__dirname, "../dist");
+const __dirname = process.cwd();
+
+const publicDirPath = path.resolve(__dirname, "./public");
+const srcDirPath = path.resolve(__dirname, "./src");
+const distDirPath = path.resolve(__dirname, "./dist");
 
 const srcFileName = "index.ts";
 const distFileName = "index.js";

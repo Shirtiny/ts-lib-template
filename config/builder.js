@@ -1,21 +1,24 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 17:41:22
- * @LastEditTime: 2021-12-09 14:54:59
+ * @LastEditTime: 2021-12-09 15:47:31
  * @Description:
  */
-const esbuild = require("esbuild");
-const childProcess = require("child_process");
-const path = require("path");
-const { sassPlugin } = require("esbuild-sass-plugin");
-const postcss = require("postcss");
-const autoprefixer = require("autoprefixer");
-const postcssPresetEnv = require("postcss-preset-env");
-const { config, isDev } = require("./var");
-const logger = require("./logger");
+import esbuild from "esbuild";
+import childProcess from "child_process";
+import path from "path";
+import { sassPlugin } from "esbuild-sass-plugin";
+import postcss from "postcss";
+import autoprefixer from "autoprefixer";
+import postcssPresetEnv from "postcss-preset-env";
+import timePlugin from "esbuild-plugin-time";
+import { config, isDev } from "./var.js";
+import logger from "./logger.js";
 
-const srcDirPath = "../src";
-const distDirPath = "../dist";
+const __dirname = process.cwd();
+
+const srcDirPath = "./src";
+const distDirPath = "./dist";
 const typesDirPath = path.resolve(__dirname, `${distDirPath}/types`);
 const fileName = config.outputFileName || "main";
 
@@ -27,6 +30,7 @@ const createFilePath = (dirPath, fileName) => {
 
 const buildList = [
   {
+    name: "Bundle Browser",
     entryPoints: [createFilePath(srcDirPath, "browser.ts")],
     platform: "browser",
     outfile: createFilePath(distDirPath, fileName + ".browser.js"),
@@ -46,6 +50,7 @@ const buildList = [
     },
   },
   {
+    name: "Bundle Esm",
     entryPoints: [createFilePath(srcDirPath, "es.ts")],
     platform: "neutral",
     outfile: createFilePath(distDirPath, fileName + ".es.js"),
@@ -65,6 +70,7 @@ const buildList = [
     },
   },
   {
+    name: "Bundle Node",
     entryPoints: [createFilePath(srcDirPath, "cli.ts")],
     platform: "node",
     outfile: createFilePath(distDirPath, fileName + ".cli.js"),
@@ -72,7 +78,13 @@ const buildList = [
   },
 ];
 
-const build = async ({ entryPoints = [], platform, outfile, plugins = [] }) => {
+const build = async ({
+  name,
+  entryPoints = [],
+  platform,
+  outfile,
+  plugins = [],
+}) => {
   await logger.runTask({
     title: `Building ${entryPoints.join("; ")}`,
     successTitle: `Build ${outfile} successfully`,
@@ -88,7 +100,7 @@ const build = async ({ entryPoints = [], platform, outfile, plugins = [] }) => {
           "process.env": JSON.stringify(config.env || process.env),
         },
         outfile,
-        plugins: [...plugins],
+        plugins: [...plugins, timePlugin(name)],
         jsxFactory: config.jsxFactory,
         jsxFragment: config.jsxFragment,
       });

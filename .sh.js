@@ -1,11 +1,11 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 20:47:19
- * @LastEditTime: 2021-11-27 10:52:42
+ * @LastEditTime: 2021-12-09 15:14:12
  * @Description:
  */
 
-const camelCase = require("camelcase");
+import camelCase from "camelcase";
 
 const { MY_ENV, HOST, PORT, NODE_ENV, npm_package_version, npm_package_name } =
   process.env;
@@ -28,7 +28,7 @@ const globalName =
 
 console.log("APP globalName : ", globalName);
 
-module.exports = {
+export default {
   globalName,
   outputFileName: "main",
   devServer: {

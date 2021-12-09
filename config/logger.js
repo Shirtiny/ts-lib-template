@@ -1,12 +1,12 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 21:18:47
- * @LastEditTime: 2021-12-09 14:46:47
+ * @LastEditTime: 2021-12-09 15:14:57
  * @Description:
  */
 
-const chalk = require("chalk");
-const tasuku = require("tasuku");
+import chalk from "chalk";
+import tasuku from "tasuku";
 
 const log = (...messages) => {
   console.log(chalk.hex("#00b7c3")(...messages));
@@ -48,9 +48,11 @@ const runTask = async ({
   return t.result;
 };
 
-module.exports = {
+const logger = {
   chan,
   server,
   log,
   runTask,
 };
+
+export default logger;

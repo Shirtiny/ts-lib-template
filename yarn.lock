@@ -1157,7 +1157,7 @@ chalk@^2.0.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^4.0.0:
+chalk@^4.0.0, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.npmmirror.com/chalk/download/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha1-qsTit3NKdAhnrrFr8CqtVWoeegE=
@@ -1589,6 +1589,13 @@ esbuild-plugin-inline-worker@^0.1.1:
     esbuild latest
     find-cache-dir "^3.3.1"
 
+esbuild-plugin-time@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/esbuild-plugin-time/-/esbuild-plugin-time-1.0.0.tgz#0bac573ae8c0c7d012c39fb1a855519684d35ea0"
+  integrity sha512-I4Shhi0fpgXxSoc34djTHIuhbEzkcBbKKiNtb3LhZe2JEE1vSxXilW+KE0M/KZ4kqORLGgdGCKuJh9CNUL55yw==
+  dependencies:
+    chalk "^4.1.2"
+
 esbuild-sass-plugin@^1.4.8:
   version "1.8.0"
   resolved "https://registry.npmmirror.com/esbuild-sass-plugin/download/esbuild-sass-plugin-1.8.0.tgz#36d00adb049735278ca2272bf2164f53a7b70e92"
@@ -1624,30 +1631,7 @@ esbuild@0.12.5:
   resolved "https://registry.npmmirror.com/esbuild/download/esbuild-0.12.5.tgz#36076a6bc1966ba2741981d30512e95e8aaff495"
   integrity sha1-Ngdqa8GWa6J0GYHTBRLpXoqv9JU=
 
-esbuild@^0.14.1:
-  version "0.14.2"
-  resolved "https://registry.npmmirror.com/esbuild/download/esbuild-0.14.2.tgz#9c1e1a652549cc33e44885eea42ea2cc6267edc2"
-  integrity sha512-l076A6o/PIgcyM24s0dWmDI/b8RQf41uWoJu9I0M71CtW/YSw5T5NUeXxs5lo2tFQD+O4CW4nBHJXx3OY5NpXg==
-  optionalDependencies:
-    esbuild-android-arm64 "0.14.2"
-    esbuild-darwin-64 "0.14.2"
-    esbuild-darwin-arm64 "0.14.2"
-    esbuild-freebsd-64 "0.14.2"
-    esbuild-freebsd-arm64 "0.14.2"
-    esbuild-linux-32 "0.14.2"
-    esbuild-linux-64 "0.14.2"
-    esbuild-linux-arm "0.14.2"
-    esbuild-linux-arm64 "0.14.2"
-    esbuild-linux-mips64le "0.14.2"
-    esbuild-linux-ppc64le "0.14.2"
-    esbuild-netbsd-64 "0.14.2"
-    esbuild-openbsd-64 "0.14.2"
-    esbuild-sunos-64 "0.14.2"
-    esbuild-windows-32 "0.14.2"
-    esbuild-windows-64 "0.14.2"
-    esbuild-windows-arm64 "0.14.2"
-
-esbuild@latest:
+esbuild@^0.14.1, esbuild@latest:
   version "0.14.2"
   resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.14.2.tgz#9c1e1a652549cc33e44885eea42ea2cc6267edc2"
   integrity sha512-l076A6o/PIgcyM24s0dWmDI/b8RQf41uWoJu9I0M71CtW/YSw5T5NUeXxs5lo2tFQD+O4CW4nBHJXx3OY5NpXg==
