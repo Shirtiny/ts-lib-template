@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-25 17:35:25
- * @LastEditTime: 2021-12-09 21:01:53
+ * @LastEditTime: 2021-12-09 22:38:17
  * @Description:
  */
 "use strict";
@@ -56,7 +56,7 @@ const serve = async () => {
 
   const result = await esbuild.serve(
     {
-      servedir: path.resolve(__dirname, "../dist"),
+      servedir: distDirPath,
       host: config.devServer.host,
     },
     {
