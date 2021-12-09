@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 18:51:15
- * @LastEditTime: 2021-06-26 19:14:26
+ * @LastEditTime: 2021-12-09 14:47:01
  * @Description:
  */
 
@@ -39,5 +39,5 @@ module.exports = {
   isPathExisted,
   mkdir,
   rm,
-  cpAllDirChildsToDir
+  cpAllDirChildsToDir,
 };

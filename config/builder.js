@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 17:41:22
- * @LastEditTime: 2021-11-27 10:42:54
+ * @LastEditTime: 2021-12-09 14:54:59
  * @Description:
  */
 const esbuild = require("esbuild");
@@ -88,7 +88,7 @@ const build = async ({ entryPoints = [], platform, outfile, plugins = [] }) => {
           "process.env": JSON.stringify(config.env || process.env),
         },
         outfile,
-        plugins,
+        plugins: [...plugins],
         jsxFactory: config.jsxFactory,
         jsxFragment: config.jsxFragment,
       });
