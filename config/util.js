@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-26 18:51:15
- * @LastEditTime: 2021-12-09 21:01:57
+ * @LastEditTime: 2021-06-26 19:14:26
  * @Description:
  */
 
@@ -20,11 +20,17 @@ const isPathExisted = async (path) => {
   });
 };
 
-const mkdir = async (dirPath) => {
-  const isExisted = await isPathExisted(dirPath);
-  if (!isExisted) {
-    fs.mkdirSync(dirPath);
+const mkdir = async (dirPath, force = false) => {
+  let isExisted = await isPathExisted(dirPath);
+  if (isExisted && force) {
+    fs.rmSync(dirPath, { recursive: true, force: true });
+    isExisted = false;
   }
+  !isExisted && fs.mkdirSync(dirPath);
+};
+
+const writeFile = (path, content) => {
+  fs.writeFileSync(path, content);
 };
 
 const rm = (path) => {
@@ -40,6 +46,7 @@ const util = {
   mkdir,
   rm,
   cpAllDirChildsToDir,
+  writeFile,
 };
 
 export default util;
