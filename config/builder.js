@@ -4,14 +4,9 @@
  * @LastEditTime: 2021-12-09 21:01:43
  * @Description:
  */
-import esbuild from "esbuild";
-import childProcess from "child_process";
 import path from "path";
-import { sassPlugin } from "esbuild-sass-plugin";
-import postcss from "postcss";
-import autoprefixer from "autoprefixer";
-import postcssPresetEnv from "postcss-preset-env";
-import timePlugin from "esbuild-plugin-time";
+import { fileURLToPath } from "url";
+import { Parcel } from "@parcel/core";
 import { config, isDev } from "./var.js";
 import logger from "./logger.js";
 
@@ -19,10 +14,10 @@ const __dirname = process.cwd();
 
 const srcDirPath = "./src";
 const distDirPath = "./dist";
-const typesDirPath = path.resolve(__dirname, `${distDirPath}/types`);
-const fileName = config.outputFileName || "main";
+// const typesDirPath = path.resolve(__dirname, `${distDirPath}/types`);
+// const fileName = config.outputFileName || "main";
 
-const tscCommand = `tsc --declaration --declarationDir ${typesDirPath} --emitDeclarationOnly`;
+// const tscCommand = `tsc --declaration --declarationDir ${typesDirPath} --emitDeclarationOnly`;
 
 const createFilePath = (dirPath, fileName) => {
   return path.resolve(__dirname, `${dirPath}/${fileName}`);
@@ -30,86 +25,44 @@ const createFilePath = (dirPath, fileName) => {
 
 const buildList = [
   {
-    name: "Bundle Browser",
-    entryPoints: [createFilePath(srcDirPath, "browser.ts")],
-    platform: "browser",
-    outfile: createFilePath(distDirPath, fileName + ".browser.js"),
-    plugins: [
-      sassPlugin({
-        async transform(source) {
-          const { css } = await postcss([
-            autoprefixer,
-            postcssPresetEnv({ stage: 0 }),
-          ]).process(source, { from: undefined });
-          return css;
-        },
-      }),
-    ],
-    loader: {
-      ".svg": "dataurl",
-    },
-  },
-  {
     name: "Bundle Esm",
-    entryPoints: [createFilePath(srcDirPath, "es.ts")],
-    platform: "neutral",
-    outfile: createFilePath(distDirPath, fileName + ".es.js"),
-    plugins: [
-      sassPlugin({
-        async transform(source) {
-          const { css } = await postcss([
-            autoprefixer,
-            postcssPresetEnv({ stage: 0 }),
-          ]).process(source, { from: undefined });
-          return css;
-        },
-      }),
-    ],
-    loader: {
-      ".svg": "dataurl",
+    entries: [createFilePath(srcDirPath, "es.ts")],
+    mode: "production",
+    shouldDisableCache: true,
+    env: config.env || process.env,
+    defaultTargetOptions: {
+      distDir: distDirPath,
+      sourceMaps: false,
+      isLibrary: true,
+      optimize: true,
+      outputFormat: 'esmodule',
     },
-  },
-  {
-    name: "Bundle Node",
-    entryPoints: [createFilePath(srcDirPath, "cli.ts")],
-    platform: "node",
-    outfile: createFilePath(distDirPath, fileName + ".cli.js"),
-    plugins: [],
+    additionalReporters: [
+      {
+        packageName: "@parcel/reporter-cli",
+        resolveFrom: fileURLToPath(import.meta.url),
+      },
+    ],
   },
 ];
 
-const build = async ({
-  name,
-  entryPoints = [],
-  platform,
-  outfile,
-  plugins = [],
-}) => {
+const build = async ({ name, ...options }) => {
   await logger.runTask({
-    title: `Building ${entryPoints.join("; ")}`,
-    successTitle: `Build ${outfile} successfully`,
+    title: `Building ${name}`,
+    successTitle: `Build ${name} successfully`,
     taskFn: async () => {
-      await esbuild.build({
-        entryPoints,
-        platform,
-        globalName: config.globalName,
-        bundle: true,
-        minify: !isDev,
-        sourcemap: isDev ? "both" : false,
-        define: {
-          "process.env": JSON.stringify(config.env || process.env),
-        },
-        outfile,
-        plugins: [...plugins, timePlugin(name)],
-        jsxFactory: config.jsxFactory,
-        jsxFragment: config.jsxFragment,
-      });
+      try {
+        let { bundleGraph, buildTime } = await new Parcel(options).run();
+        let bundles = bundleGraph.getBundles();
+        // console.log(`✨ Built ${bundles.length} bundles in ${buildTime}ms!`);
+      } catch (err) {
+        console.log(err.diagnostics);
+      }
     },
   });
 };
 
 const buildAll = async () => {
-  childProcess.execSync(tscCommand);
   logger.log("\n♪(^∇^*) ~☆!, Generated declaration.");
   logger.log("o(*^▽^*)┛ Building, please wait...");
   const promises = buildList.map((item) => build(item));

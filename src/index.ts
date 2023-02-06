@@ -1,5 +1,5 @@
 import { add } from "./main";
-import "./index.scss";
+import "./style/index.scss";
 
 const div = document.createElement("div");
 div.classList.add("example");

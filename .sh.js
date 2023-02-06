@@ -30,18 +30,9 @@ console.log("APP globalName : ", globalName);
 
 export default {
   globalName,
-  outputFileName: "main",
   devServer: {
     host: HOST || "localhost",
     port: PORT || 2021,
-    proxy: {
-      "^/api": {
-        target: "http://192.168.0.123:1234",
-        pathRewrite: { "^/api": "" },
-      },
-    },
   },
-  jsxFactory: "React.createElement",
-  jsxFragment: "React.Fragment",
   env,
 };

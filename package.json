@@ -5,16 +5,12 @@
   "type": "module",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/main.es.js",
-  "browser": "./dist/main.es.js",
-  "module": "./dist/main.es.js",
   "exports": {
-    "./dist/main.es.css": "./dist/main.es.css",
+    "./dist/main.css": "./dist/main.es.css",
     ".": {
-      "import": "./dist/main.es.js",
-      "require": "./dist/main.cli.js"
+      "import": "./dist/main.es.js"
     }
   },
-  "bin": "./dist/main.cli.js",
   "files": [
     "dist",
     "LICENSE"
@@ -29,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shirtiny/ts-lib-template"
+    "url": "git+https://github.com/Shirtiny/ts-lib-template/tree/parcel"
   },
   "keywords": [
     "ts",
@@ -49,27 +45,27 @@
   "jest": {
     "preset": "ts-jest"
   },
-  "homepage": "https://github.com/Shirtiny/ts-lib-template#readme",
+  "homepage": "https://github.com/Shirtiny/ts-lib-template/tree/parcel#readme",
   "devDependencies": {
     "@cowcoders/eslint-config": "^1.2.9",
+    "@parcel/config-default": "^2.8.3",
+    "@parcel/core": "^2.8.3",
+    "@parcel/packager-ts": "^2.8.3",
+    "@parcel/reporter-cli": "^2.8.3",
+    "@parcel/transformer-sass": "^2.8.3",
+    "@parcel/transformer-typescript-types": "^2.8.3",
     "@types/jest": "26.0.23",
     "@types/node": "15.6.1",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
-    "autoprefixer": "^10.3.0",
     "camelcase": "^6.2.1",
     "dotenv-cli": "^4.0.0",
-    "esbuild": "0.12.5",
-    "esbuild-plugin-time": "^1.0.0",
-    "esbuild-sass-plugin": "^1.4.8",
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "jest": "27.0.3",
     "nanocolors": "^0.2.10",
     "open": "^8.2.0",
-    "postcss": "^8.3.5",
-    "postcss-preset-env": "^6.7.0",
     "prettier": "^2.3.0",
     "shx": "^0.3.3",
     "tasuku": "^1.0.2",
