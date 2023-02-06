@@ -20,7 +20,7 @@
     "build": "npm run clean && dotenv -c production node config/builder.js",
     "test": "jest",
     "lint": "eslint --max-warnings 0 . --ext .ts",
-    "clean": "shx rm -rf dist",
+    "clean": "shx rm -rf dist dist_browser",
     "ts-node": "ts-node"
   },
   "repository": {

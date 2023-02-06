@@ -68,8 +68,9 @@ const buildList = [
 ];
 
 const build = async ({ name, ...options }) => {
+  console.log(name);
   await logger.runTask({
-    title: `Building ${name}`,
+    title: `Building`,
     successTitle: `Build ${name} successfully`,
     taskFn: async () => {
       try {
