@@ -12,15 +12,15 @@ import logger from "./logger.js";
 
 const __dirname = process.cwd();
 
-const srcDirPath = "./src";
-const distDirPath = "./dist";
-// const typesDirPath = path.resolve(__dirname, `${distDirPath}/types`);
+const srcDirPath = path.resolve(__dirname, `./src`);
+const distDirPath = path.resolve(__dirname, `./dist`);
+const browserDistDirPath = path.resolve(__dirname, `./dist_browser`);
 // const fileName = config.outputFileName || "main";
 
 // const tscCommand = `tsc --declaration --declarationDir ${typesDirPath} --emitDeclarationOnly`;
 
 const createFilePath = (dirPath, fileName) => {
-  return path.resolve(__dirname, `${dirPath}/${fileName}`);
+  return `${dirPath}/${fileName}`;
 };
 
 const buildList = [
@@ -35,7 +35,28 @@ const buildList = [
       sourceMaps: false,
       isLibrary: true,
       optimize: true,
-      outputFormat: 'esmodule',
+    },
+    additionalReporters: [
+      {
+        packageName: "@parcel/reporter-cli",
+        resolveFrom: fileURLToPath(import.meta.url),
+      },
+    ],
+  },
+  {
+    name: "Bundle Browser",
+    entries: [createFilePath(srcDirPath, "browser.ts")],
+    mode: "production",
+    shouldDisableCache: true,
+    env: config.env || process.env,
+    targets: {
+      main: {
+        distDir: browserDistDirPath,
+        sourceMap: false,
+        isLibrary: false,
+        optimize: true,
+        outputFormat: "global",
+      },
     },
     additionalReporters: [
       {
