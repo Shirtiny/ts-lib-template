@@ -7,6 +7,7 @@ dist_*
 .vscode
 .idea
 pkg
+.turbo
 
 # Log files
 npm-debug.log*

@@ -9,6 +9,9 @@
     "./dist/main.css": "./dist/main.es.css",
     ".": {
       "import": "./dist/main.es.js"
+    },
+    "./src/*": {
+      "import": "./src/*"
     }
   },
   "files": [
