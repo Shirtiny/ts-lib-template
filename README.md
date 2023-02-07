@@ -68,7 +68,7 @@ module.exports = {
 };
 ```
 
-```json
+```jsonc
 // .proxyrc
 {
   "/api": {
