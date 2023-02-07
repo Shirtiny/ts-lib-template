@@ -12,6 +12,9 @@
     ".": {
       "import": "./dist/main.es.js",
       "require": "./dist/main.cli.js"
+    },
+    "./src/*": {
+      "import": "./src/*"
     }
   },
   "bin": "./dist/main.cli.js",
