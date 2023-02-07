@@ -19,11 +19,11 @@ yarn start
 
 ## Introduction
 
-This is a template for typescript library base on esbuild. This template includes followings:
+This is a template for typescript library base on parcel. This template includes followings:
 
 - TypeScript
 
-- Esbuild
+- Parcel
 
 - Makefile
 
@@ -36,8 +36,6 @@ This is a template for typescript library base on esbuild. This template include
 - Eslint
 
 - Jest
-
-- Sass/scss & Autoprefixer
 
 - Github action
 
@@ -60,27 +58,26 @@ const env = {
 };
 
 module.exports = {
-  // your lib global name
-  globalName: "tsLibTemplate",
-  // the output prefix name， default is 'main', please check your package.json after this option changed.
-  outputFileName: "main",
   // devServer option
   devServer: {
     host: HOST || "localhost",
     port: PORT || 2021,
-    proxy: {
-      "^/api": {
-        target: "http://192.168.0.123:1234",
-        pathRewrite: { "^/api": "" },
-      },
-    },
   },
-  // jsx options direct set to esbuild
-  jsxFactory: "React.createElement",
-  jsxFragment: "React.Fragment",
   // if env is false, default is all process env
   env,
 };
+```
+
+```json
+// .proxyrc
+{
+  "/api": {
+    "target": "http://localhost:8000/",
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}
 ```
 
 ## Acknowledgment
