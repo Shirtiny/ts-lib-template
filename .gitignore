@@ -1,5 +1,6 @@
 node_modules
 dist
+dist_*
 *.tgz
 
 .DS_Store
@@ -12,3 +13,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+.parcel-cache

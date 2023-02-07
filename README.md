@@ -19,11 +19,11 @@ yarn start
 
 ## Introduction
 
-This is a template for typescript library base on esbuild. This template includes followings:
+This is a template for typescript library base on esbuild/parcel. This template includes followings:
 
 - TypeScript
 
-- Esbuild
+- Esbuild / Parcel
 
 - Makefile
 
@@ -45,7 +45,15 @@ This is a template for typescript library base on esbuild. This template include
 
 Create your repository by clicking 'Use this template' top of the page. Then, check the package.json file.
 
+Checkout the branch:
+
+- **esbuild** This branch is based on Esbuild with a lot of customization.
+
+- **parcel** This branch is based on Parcel, it's more simple and easy to understand.
+
 ## Config
+
+> This just an example, please refer to the content on the specific branch.
 
 ```js
 // .sh.js
