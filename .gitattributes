@@ -206,3 +206,6 @@ Procfile          text
 
 # Ignore files (like .npmignore or .gitignore)
 *.*ignore         text
+
+
+*.js linguist-language=typescript
