@@ -48,7 +48,7 @@ This is a template for typescript library base on esbuild/parcel. This template 
 2. Select a branch and rename it as `main`, then mark that branch as `default` at github repository settings:
    - `esbuild` This branch is based on Esbuild with a lot of customization.
    - `parcel` This branch is based on Parcel, it's more simple and easy to understand.  
-   - `main` Same as `esbuild`.
+   - `main` Same as `esbuild`, but it will move to parcel when parcel is complete.
 
 ## Config
 
