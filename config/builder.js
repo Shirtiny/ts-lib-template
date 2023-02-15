@@ -9,86 +9,85 @@ import { fileURLToPath } from "url";
 import { Parcel } from "@parcel/core";
 import { config, isDev } from "./var.js";
 import logger from "./logger.js";
+import util from "./util.js";
 
 const __dirname = process.cwd();
 
 const srcDirPath = path.resolve(__dirname, `./src`);
 const distDirPath = path.resolve(__dirname, `./dist`);
 const browserDistDirPath = path.resolve(__dirname, `./dist_browser`);
-// const fileName = config.outputFileName || "main";
-
-// const tscCommand = `tsc --declaration --declarationDir ${typesDirPath} --emitDeclarationOnly`;
-
-const createFilePath = (dirPath, fileName) => {
-  return `${dirPath}/${fileName}`;
-};
 
 const buildList = [
   {
-    name: "Bundle Esm",
-    entries: [createFilePath(srcDirPath, "es.ts")],
-    mode: "production",
-    shouldDisableCache: true,
-    env: config.env || process.env,
-    defaultTargetOptions: {
-      distDir: distDirPath,
-      sourceMaps: false,
-      isLibrary: true,
-      optimize: true,
-    },
-    additionalReporters: [
-      {
-        packageName: "@parcel/reporter-cli",
-        resolveFrom: fileURLToPath(import.meta.url),
-      },
-    ],
-  },
-  {
-    name: "Bundle Browser",
-    entries: [createFilePath(srcDirPath, "browser.ts")],
-    mode: "production",
-    shouldDisableCache: true,
-    env: config.env || process.env,
+    name: "Esm",
+    entries: `${srcDirPath}/main.ts`,
     targets: {
       main: {
-        distDir: browserDistDirPath,
-        sourceMap: false,
-        isLibrary: false,
-        optimize: true,
-        outputFormat: "global",
+        isLibrary: true,
+        distDir: distDirPath,
       },
     },
-    additionalReporters: [
-      {
-        packageName: "@parcel/reporter-cli",
-        resolveFrom: fileURLToPath(import.meta.url),
+  },
+  {
+    name: "Browser",
+    entries: `${srcDirPath}/browser.ts`,
+    targets: {
+      browser: {
+        isLibrary: true,
+        distDir: distDirPath,
       },
-    ],
+    },
+  },
+  {
+    name: "Types",
+    entries: `${srcDirPath}/main.ts`,
+    targets: {
+      types: {
+        isLibrary: true,
+        distDir: `${distDirPath}/types`,
+      },
+    },
+    isGenerateDeclaration: true,
   },
 ];
 
-const build = async ({ name, ...options }) => {
-  console.log(name);
-  await logger.runTask({
-    title: `Building`,
-    successTitle: `Build ${name} successfully`,
-    taskFn: async () => {
-      try {
-        let { bundleGraph, buildTime } = await new Parcel(options).run();
-        let bundles = bundleGraph.getBundles();
-        // console.log(`✨ Built ${bundles.length} bundles in ${buildTime}ms!`);
-      } catch (err) {
-        console.log(err.diagnostics);
+const build = async ({
+  name,
+  entries,
+  targets,
+  isGenerateDeclaration,
+  ...options
+}) => {
+  try {
+    let { bundleGraph, buildTime } = await new Parcel({
+      name,
+      entries,
+      mode: "production",
+      shouldDisableCache: true,
+      env: config.env || process.env,
+      targets,
+    }).run();
+    let bundles = bundleGraph.getBundles();
+    if (bundles.length > 0) {
+      if (isGenerateDeclaration) {
+        console.log(`Generated declaration in ${buildTime}ms.`);
+      } else {
+        console.log(
+          `Built target ${name} size ${
+            bundles[0].stats.size / 1000
+          }KB in ${buildTime}ms...`,
+        );
       }
-    },
-  });
+    }
+  } catch (err) {
+    console.log(err.diagnostics);
+  }
 };
 
 const buildAll = async () => {
-  logger.log("\n♪(^∇^*) ~☆!, Generated declaration.");
   logger.log("o(*^▽^*)┛ Building, please wait...");
-  const promises = buildList.map((item) => build(item));
-  await Promise.all(promises);
+  await util.pipePromises(...buildList.map((item) => () => build(item)))();
+  logger.log("✨ Build completed ♪(^∇^*) ~☆!");
 };
 
 buildAll();

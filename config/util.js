@@ -7,6 +7,7 @@
 
 import fs from "fs";
 import shell from "shelljs";
+import path from "path";
 
 const isPathExisted = async (path) => {
   return new Promise((resolve) => {
@@ -41,12 +42,18 @@ const cpAllDirChildsToDir = (dirPath, targetDirPath) => {
   shell.cp("-rf", `${dirPath}/*`, `${targetDirPath}/`);
 };
 
+const pipePromises = (...fns) => {
+  return async (input) =>
+    fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(input));
+};
+
 const util = {
   isPathExisted,
   mkdir,
   rm,
   cpAllDirChildsToDir,
   writeFile,
+  pipePromises,
 };
 
 export default util;

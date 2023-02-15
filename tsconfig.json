@@ -28,24 +28,9 @@
     "removeComments": true,
     "sourceMap": true,
     "declaration": true,
-    "emitDeclarationOnly": false,
-    "outDir": "./tsc/",
-    "types": [
-      "node",
-      "jest"
-    ],
-    "lib": [
-      "ES6",
-      "DOM"
-    ]
+    "types": ["node", "jest"],
+    "lib": ["ES6", "DOM"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-  ],
-  "exclude": [
-    "node_modules",
-    "node",
-    "**/*.test.ts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "node", "**/*.test.ts"]
 }
