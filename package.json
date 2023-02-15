@@ -3,14 +3,11 @@
   "version": "1.4.16",
   "description": "ts-lib-template desc",
   "type": "module",
-  "types": "./dist/types/main.d.ts",
+  "types": "./dist/types/index.d.ts",
   "main": "./dist/main.js",
-  "legacy": "./dist/main.legacy.js",
+  "browser": "./dist/main.browser.js",
   "exports": {
-    "./dist/main.css": "./dist/main.es.css",
-    ".": {
-      "import": "./dist/main.es.js"
-    },
+    "./dist/main.css": "./dist/main.css",
     "./src/*": {
       "import": "./src/*"
     }
@@ -20,11 +17,11 @@
     "LICENSE"
   ],
   "scripts": {
-    "start": "dotenv -c development node config/server.js",
-    "build": "npm run clean && dotenv -c production node config/builder.js",
+    "start": "dotenv -c development node deploy/server.js",
+    "build": "npm run clean && dotenv -c production node deploy/builder.js",
     "test": "jest",
     "lint": "eslint --max-warnings 0 . --ext .ts",
-    "clean": "shx rm -rf dist dist_browser",
+    "clean": "shx rm -rf dist",
     "ts-node": "ts-node"
   },
   "repository": {

@@ -11,9 +11,6 @@ import path from "path";
 import open from "open";
 import { fileURLToPath } from "url";
 import { Parcel } from "@parcel/core";
-import postcss from "postcss";
-import autoprefixer from "autoprefixer";
-import postcssPresetEnv from "postcss-preset-env";
 import { config } from "./var.js";
 import util from "./util.js";
 import logger from "./logger.js";
@@ -24,16 +21,13 @@ const publicDirPath = path.resolve(__dirname, "./public");
 const srcDirPath = path.resolve(__dirname, "./src");
 const distDirPath = path.resolve(__dirname, "./dist");
 
-const srcFileName = "index.ts";
-const distFileName = "index.js";
-
 const parcel = new Parcel({
   entries: [`${srcDirPath}/index.html`],
   mode: "development",
   shouldDisableCache: true,
   env: config.env || process.env,
   defaultTargetOptions: {
-    distDir: distDirPath,
+    distDir: distDirPath + "/",
     sourceMaps: true,
     publicUrl: "/",
     isLibrary: false,
@@ -56,6 +50,7 @@ const parcel = new Parcel({
 });
 
 const serve = async () => {
+  util.rm(distDirPath);
   const subscription = await parcel.watch((err, event) => {
     if (err) {
       // fatal error
@@ -74,7 +69,7 @@ const serve = async () => {
 
   // some time later...
   // await subscription.unsubscribe();
-  util.cpAllDirChildsToDir(publicDirPath, distDirPath);
+  await util.cpAllDirChildrenToDir(publicDirPath, distDirPath);
   logger.log(`✨ (≧∇≦)ﾉ Hi~！ server started.`);
   open(`http://${config.devServer.host}:${config.devServer.port}`);
 };

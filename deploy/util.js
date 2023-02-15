@@ -35,11 +35,17 @@ const writeFile = (path, content) => {
 };
 
 const rm = (path) => {
-  shell.rm("-rf", path);
+  // shell.rm("-rf", path);
+  fs.rmSync(path, { recursive: true, force: true });
 };
 
-const cpAllDirChildsToDir = (dirPath, targetDirPath) => {
+const cpAllDirChildrenToDir = async (dirPath, targetDirPath) => {
+  await mkdir(targetDirPath);
   shell.cp("-rf", `${dirPath}/*`, `${targetDirPath}/`);
+};
+
+const renameFile = (filePath, newName) => {
+  shell.mv(filePath, path.resolve(path.dirname(filePath), newName));
 };
 
 const pipePromises = (...fns) => {
@@ -51,8 +57,9 @@ const util = {
   isPathExisted,
   mkdir,
   rm,
-  cpAllDirChildsToDir,
+  cpAllDirChildrenToDir,
   writeFile,
+  renameFile,
   pipePromises,
 };
 

@@ -15,7 +15,6 @@ const __dirname = process.cwd();
 
 const srcDirPath = path.resolve(__dirname, `./src`);
 const distDirPath = path.resolve(__dirname, `./dist`);
-const browserDistDirPath = path.resolve(__dirname, `./dist_browser`);
 
 const buildList = [
   {
@@ -24,17 +23,25 @@ const buildList = [
     targets: {
       main: {
         isLibrary: true,
+        sourceMap: false,
+        optimize: true,
+        outputFormat: "esmodule",
         distDir: distDirPath,
       },
     },
   },
   {
     name: "Browser",
-    entries: `${srcDirPath}/browser.ts`,
+    entries: `${srcDirPath}/main.browser.ts`,
     targets: {
       browser: {
-        isLibrary: true,
         distDir: distDirPath,
+        sourceMap: false,
+        optimize: true,
+        outputFormat: "global",
+        engines: {
+          browsers: "> 0.5%, last 2 versions, not dead",
+        },
       },
     },
   },
@@ -43,11 +50,10 @@ const buildList = [
     entries: `${srcDirPath}/main.ts`,
     targets: {
       types: {
-        isLibrary: true,
+        sourceMap: false,
         distDir: `${distDirPath}/types`,
       },
     },
-    isGenerateDeclaration: true,
   },
 ];
 
@@ -68,8 +74,12 @@ const build = async ({
       targets,
     }).run();
     let bundles = bundleGraph.getBundles();
+
     if (bundles.length > 0) {
-      if (isGenerateDeclaration) {
+      // 处理types
+      if (targets.types) {
+        const fileName = entries.split("/").pop();
+        util.renameFile(`${targets.types.distDir}/${fileName}`, "index.d.ts");
         console.log(`Generated declaration in ${buildTime}ms.`);
       } else {
         console.log(
