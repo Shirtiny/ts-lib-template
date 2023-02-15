@@ -45,7 +45,7 @@ const parcel = new Parcel({
     {
       packageName: "@parcel/reporter-cli",
       resolveFrom: fileURLToPath(import.meta.url),
-    },
+    }
   ],
 });
 
@@ -70,6 +70,7 @@ const serve = async () => {
   // some time later...
   // await subscription.unsubscribe();
   await util.cpAllDirChildrenToDir(publicDirPath, distDirPath);
+
   logger.log(`✨ (≧∇≦)ﾉ Hi~！ server started.`);
   open(`http://${config.devServer.host}:${config.devServer.port}`);
 };
