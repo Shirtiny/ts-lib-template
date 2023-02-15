@@ -4,10 +4,11 @@
   "description": "ts-lib-template desc",
   "type": "module",
   "types": "./dist/types/index.d.ts",
-  "main": "./dist/main.js",
+  "main": "./dist/main.es.js",
   "browser": "./dist/main.browser.js",
   "exports": {
-    "./dist/main.css": "./dist/main.css",
+    "./dist/main.es.css": "./dist/main.es.css",
+    "./dist/main.browser.css": "./dist/main.browser.css",
     "./src/*": {
       "import": "./src/*"
     }

@@ -19,7 +19,7 @@ const distDirPath = path.resolve(__dirname, `./dist`);
 const buildList = [
   {
     name: "Esm",
-    entries: `${srcDirPath}/main.ts`,
+    entries: `${srcDirPath}/main.es.ts`,
     targets: {
       main: {
         isLibrary: true,
