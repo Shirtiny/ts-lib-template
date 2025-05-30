@@ -10,6 +10,7 @@
   "exports": {
     "./dist/main.es.css": "./dist/main.es.css",
     ".": {
+      "types": "./dist/types/main.d.ts",
       "import": "./dist/main.es.js",
       "require": "./dist/main.cli.js"
     },
